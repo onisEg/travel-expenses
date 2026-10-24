@@ -12,10 +12,11 @@ export interface ExpenseReport {
 
 
 const generateExpenseReport = (dailyExpenses: number[], dailyBudget: number): ExpenseReport => {
-    //error
+    //validation
     if (dailyExpenses.some((expense) => expense < 0)) {
         throw new Error(`Expenses cannot be negative!`);
     }
+    //variables
     const travelDays = dailyExpenses.length;
     const expenseDays = dailyExpenses.filter((expense) => expense > 0).length;
     const totalExpenses = dailyExpenses.reduce(
@@ -55,7 +56,7 @@ const generateExpenseReport = (dailyExpenses: number[], dailyBudget: number): Ex
 
 console.log(generateExpenseReport([50, 0, 120, 85], 100))
 
-/* Retorna:
+/* Result is:
 {
 travelDays: 4,
 expenseDays: 3,
