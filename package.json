@@ -6,11 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest --watch",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^5.0.5",
+    "jsdom": "^28.1.0",
     "typescript": "~6.0.3",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "vite-node": "^6.0.0"

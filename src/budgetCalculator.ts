@@ -1,9 +1,15 @@
-export const calculateBudgetStatus = (totalExpenses: number, initialBudget: number) => {
-    if (totalExpenses < (initialBudget * 0.8)) {
-        return `Under budget ✈️`
-    } else if (totalExpenses >= (initialBudget * 0.8) && (totalExpenses <= initialBudget * 1)) {
-        return `Within budget ✅`
-    } else {
-        return `Over budget ⚠️`
+export const calculateBudgetStatus = (initialBudget: number, totalExpenses: number): string => {
+    // validation
+    if (totalExpenses < 0) {
+        throw new Error("Les despeses no poden ser negatives");
     }
-}
+
+    // status
+    if (totalExpenses < initialBudget * 0.8) {
+        return "Sota pressupost ✈️";
+    } else if (totalExpenses <= initialBudget) {
+        return "Dins pressupost ✅";
+    } else {
+        return "Sobre pressupost ⚠️";
+    }
+};
