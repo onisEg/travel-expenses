@@ -11,11 +11,16 @@ export interface ExpenseReport {
 }
 
 
-const generateExpenseReport = (dailyExpenses: number[], dailyBudget: number): ExpenseReport => {
+export const generateExpenseReport = (dailyExpenses: number[], dailyBudget: number): ExpenseReport => {
     //validation
-    if (dailyExpenses.some((expense) => expense < 0)) {
-        throw new Error(`Expenses cannot be negative!`);
+
+    if (dailyExpenses.some((expense) => Number.isNaN(expense))) {
+        throw new Error("You have wight numbers !");
     }
+    if (dailyExpenses.some((expense) => expense < 0)) {
+        throw new Error("Cannot be negative !");
+    }
+
     //variables
     const travelDays = dailyExpenses.length;
     const expenseDays = dailyExpenses.filter((expense) => expense > 0).length;
@@ -28,33 +33,31 @@ const generateExpenseReport = (dailyExpenses: number[], dailyBudget: number): Ex
     let rating: 1 | 2 | 3;
     let feedback: string;
 
+ 
+    // rating
     if (averageDailyExpense <= dailyBudget) {
         rating = 3;
-        feedback = "Excel·lent gestió!";
+        feedback = "Excellent management!";
     } else if (averageDailyExpense <= dailyBudget * 1.2) {
         rating = 2;
-        feedback = "Right, but tight";
+        feedback = "Correct, but tight!";
     } else {
         rating = 1;
-        feedback = "Can improve";
+        feedback = "It can improve";
     }
 
     // Return the report
     return {
+        averageDailyExpense,
         travelDays,
         expenseDays,
         dailyBudget,
-        averageDailyExpense,
         underBudget,
         rating,
         feedback,
     };
 
-
-
 }
-
-console.log(generateExpenseReport([50, 0, 120, 85], 100))
 
 /* Result is:
 {
